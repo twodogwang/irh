@@ -1,0 +1,14 @@
+<div>
+	<yd-popup v-model="_show" position="center" width="80%" closeOnClickModal="false">
+	    <h2 class="pop_tit">提示</h2>
+	    <section class="pop_body">
+	
+	        截止{{time_stamp}},您有{{count}}个新的订单，请注意查收
+	    </section>
+	    <yd-button size="large" type="danger" @click.native="closeMsgPop">知道了</yd-button>
+	</yd-popup>
+	
+	<!-- <audio id="audio1" loop="loop" autoplay="autoplay"  v-if="count">
+	    <source src="images/audio.mp3"  type="audio/mpeg" />
+	</audio> -->
+</div>

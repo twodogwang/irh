@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>我的信息</title>
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/common.css" media="screen">
+    <link rel="stylesheet" href="css/zh.css" media="screen">
+</head>
+
+<body>
+    <!-- <div id='loading'> <div class='line-scale-pulse-out'> <i></i><i></i><i></i><i></i><i></i> </div></div> -->
+
+    <div id="app" v-cloak>
+        <section class="layout">
+            <nav class="layout_head">
+                <a class="left" href="my.html"><i class='iconfont icon-nav_fanhui_baise'></i></a>
+                <h1>设置</h1>
+                <a href="#" class="right">
+                    <p class="regp"></p>
+                </a>
+            </nav>
+            <div class="layout_body scroll">
+
+                <div class="du_form">
+                    <div class="cut"></div>
+                    <dl class="wide">
+                        <dd>
+                            <label class="label_tit">修改密码</label>
+                            <a href="change_psw.html">
+                                <div class="chose_btn"></div>
+                            </a>
+                        </dd>
+                        <!-- <dd>
+                            <label class="label_tit">意见反馈</label>
+                            <div class="chose_btn"></div>
+                        </dd>
+                        <dd>
+                            <label class="label_tit">关于我们</label>
+                            <div class="chose_btn"></div>
+                        </dd>
+                        <dd>
+                            <label class="label_tit">服务协议</label>
+                            <div class="chose_btn"></div>
+                        </dd> -->
+                    </dl>
+                </div>
+
+                <div class="du_form ">
+                    <div class="cut"></div>
+                    <dl class="wide">
+                        <dd style="justify-content:center">
+                            退出登录
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
+
+<script src="plugins/vue2.5.9.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.3.js"></script>
+<script src="plugins/ydui.flexible.js"></script>
+<script src="plugins/ele2.0.8.js"></script>
+<script src="plugins/moment-with-locales.min.js"></script>
+<script src="plugins/lodash.min.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/common.js"></script>
+<script src="js/du.js"></script>
+<script src="js/gov_province_city_area_id.js"></script>
+<script>
+    /*var District = require('js/gov_province_city_area_id');*/
+    var MyInfo = {
+        pic: 'images/user.jpg',
+        nickname: 'Anslily',
+        name: '',
+        birthday: '',
+        phone: '',
+        address: '',
+        sex: '请选择',
+        area: '请选择'
+    };
+    var vm = new Vue({
+        mixins: [mixin_common],
+        el: '#app',
+        mounted: function () {
+            console.log(window.YDUI_DISTRICT);
+        },
+        methods: {
+            resultArea: function (ret) {
+                this.myinfo.area = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
+            },
+            saveInfo: function () {
+                console.log(this.myinfo);
+            }
+        },
+        data: {
+            myinfo: MyInfo,
+            showSex: false,
+            showArea: false,
+            district: window.YDUI_DISTRICT,
+            sexlist: [
+                {
+                    label: '男',
+                    callback: function () {
+                        console.log(this.label);
+                        vm.myinfo.sex = this.label;
+                    }
+                },
+                {
+                    label: '女',
+                    callback: function () {
+                        console.log(this.label);
+                        vm.myinfo.sex = this.label;
+                    }
+                },
+                {
+                    label: '保密',
+                    callback: function () {
+                        console.log(this.label);
+                        vm.myinfo.sex = this.label;
+                    }
+                },
+            ]
+        }
+    });
+
+</script>

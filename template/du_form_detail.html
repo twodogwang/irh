@@ -1,0 +1,41 @@
+<div class="du_form">
+  <dl class="p30 scroll">
+    <dd class="bar_input" v-for="item in arr">
+      <label>{{item.label}}</label>
+      <yd-input v-model="my.remark" :placeholder="item.placeholder" v-if="item.type='text'"></yd-input>
+      <!-- <el-select v-model="my.work_type" placeholder="请选择">
+          <el-option v-for="item in arr_type" :key="item" :label="item" :value="item"> </el-option>
+        </el-select> -->
+    </dd>
+  
+    <!-- <dd class="bar_input">
+      <label>开始时间<sup>*</sup></label>
+      <yd-datetime type="time" v-model="my.time1"></yd-datetime>
+    </dd>
+  
+    <dd class="bar_input">
+      <label>结束时间<sup>*</sup></label>
+      <yd-datetime type="time" v-model="my.time2"></yd-datetime>
+    </dd>
+  
+    <dd class="bar_input">
+      <label>开始日期<sup>*</sup></label>
+      <yd-datetime type="date" v-model="my.date1"></yd-datetime>
+    </dd>
+  
+    <dd class="bar_input">
+      <label>结束日期<sup>*</sup></label>
+      <yd-datetime type="date" v-model="my.date2"></yd-datetime>
+    </dd>
+  
+    <dd class="cut"></dd>
+    
+    
+    <dd class="bar_input">
+      <label>备注</label>
+      <yd-input v-model="my.remark" placeholder="请输入备注信息"></yd-input>
+    </dd> -->
+  </dl>
+  
+  <yd-button size="large" type="warning" @click.native="form_submit"><i class='iconfont icon-addition'></i> 确定</yd-button>
+</div>

@@ -1,0 +1,20 @@
+{
+  "name": "irh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server  --hot   --inline     --historyApiFallback --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.coding.net/dsxgwj/iRH.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "webpack": "^3.10.0"
+  }
+}

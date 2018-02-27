@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>医生列表</title>
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/common.css" media="screen">
+    <link rel="stylesheet" href="css/zh.css" media="screen">
+  </head>
+    <body>
+        <!-- <div id='loading'> <div class='line-scale-pulse-out'> <i></i><i></i><i></i><i></i><i></i> </div></div> -->
+
+        <div id="app" v-cloak>
+          <section class="layout sec1">
+            <nav class="layout_head" >
+              <a class="left" href="demo_completed_service.html"><i class='iconfont icon-nav_fanhui_baise'></i></a>
+              <h1>医生列表</h1>
+              <a class="right"></a>
+            </nav>
+            <div  class="layout_body scroll">
+              <du_list_mock url="dl" class="doctor_list">
+                <li slot="item" slot-scope="props">
+                  <div class="left">
+                    <div class="pic" :style="{backgroundImage: 'url(' + props.item_data.pic + ')'}" @click="popinfo(props.item_data)"></div>
+                    <div class="follow" :class="{'followed':props.item_data.fol}" @click="props.item_data.fol = !props.item_data.fol">{{props.item_data.fol ? '已关注' : '关注'}}</div>
+                  </div>
+                  <div class="right">
+                    <p @click="popinfo(props.item_data)"><span class="name">{{props.item_data.name}}</span>{{props.item_data.pos}}</p>
+                    <p class="orgdep" @click="popinfo(props.item_data)"><span>{{props.item_data.org}}</span>{{props.item_data.dep}}</p>
+                    <p @click="popinfo(props.item_data)">地区：{{props.item_data.loc}}</p>
+                    <a href="#" class="consult">在线咨询</a>
+                  </div>
+                </li>
+              </du_list_mock>
+              <zh_popinfo :show="showInfo" :data="itemdata"></zh_popinfo>
+              <!-- <yd-popup class="zh_popinfo" v-model="showInfo.show" position="center" width="80%" height="50%">
+                <div class="pic" :style="{backgroundImage: 'url(' + itemdata.pic + ')'}"></div>
+                <h1>{{itemdata.name}}</h1>
+                <h3>{{itemdata.pos}}</h3>
+                <p>所属医院：{{itemdata.org}}</p>
+                <p>科室：{{itemdata.dep}}</p>
+                <p>所属地：{{itemdata.loc}}</p>
+                <p>个人简介：{{itemdata.inf}}</p>
+                <div class="btns">
+                  <div class="follow" :class="{'followed':itemdata.fol}" @click="itemdata.fol = !itemdata.fol">{{itemdata.fol ? '取消关注' : '关注'}}</div>
+                  <div class="confirm" @click="showInfo.show = false">确定</div>
+                </div>
+                <div class="close" @click="showInfo.show = false">关闭</div>
+              </yd-popup> -->
+            </div>
+          </section>
+        </div>
+    </body>
+</html>
+
+<script src="plugins/vue2.5.9.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.3.js"></script>
+<script src="plugins/ydui.flexible.js"></script>
+<script src="plugins/ele2.0.8.js"></script>
+<script src="plugins/moment-with-locales.min.js"></script>
+<script src="plugins/lodash.min.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/common.js"></script>
+<script src="js/du.js"></script>
+<script src="js/zh.js"></script>
+<script>
+
+var vm = new Vue({
+  mixins: [mixin_common],
+  el: '#app',
+  mounted:function () {
+  },
+  methods:{
+    popinfo: function (data) {
+      console.log(data);
+      this.itemdata = data;
+      this.showInfo.show = true;
+    }
+  },
+  data: {
+    showInfo: {show: false},
+    itemdata: {}
+  }
+});
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>IRH首页</title>
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+
+    <link rel="stylesheet" href="css/common.css" media="screen">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id='loading'>
+        <div class='line-scale-pulse-out'> <i></i><i></i><i></i><i></i><i></i> </div>
+    </div>
+
+    <div id="app" v-cloak>
+    </div>
+</body>
+
+</html>
+
+<script src="plugins/vue2.5.9.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.3.js"></script>
+<script src="plugins/ydui.flexible.js"></script>
+<script src="plugins/moment-with-locales.min.js"></script>
+<script src="plugins/iconfont.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/common.js"></script>
+<script src="js/du.js"></script>
+<script>
+    var vm = new Vue({
+        mixins: [mixin_common],
+        el: '#app',
+        mounted: function () {
+            var exp = 30 * 24 * 60 * 60 * 1000 - 10 * 60 * 1000;
+            //this.get('userinfo', exp)
+            //this.loading(false);
+            // post('/User/Login', { userName: 'ksxy526291', pwd: '111' }).then(function (data) {
+            //     console.log(data)
+            // })
+        },
+        methods: {
+            set: function (key, value) {
+                var curTime = new Date().getTime();
+                localStorage.setItem(key, JSON.stringify({ data: value, time: curTime }));
+            },
+            get: function (key, exp) {
+                var data = localStorage.getItem(key);
+                var dataObj = JSON.parse(data);
+                if (new Date().getTime() - dataObj.time > exp) {
+                    console.log('信息已过期');
+                } else {
+                    var dataObjDatatoJson = JSON.parse(dataObj.data)
+                    return dataObjDatatoJson;
+                }
+            }
+        },
+        data: {
+        }
+    });
+
+</script>

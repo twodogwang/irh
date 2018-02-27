@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>修改密码</title>
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/common.css" media="screen">
+  </head>
+    <body>
+
+        <div id="app" v-cloak>
+          <section class="layout sec1">
+
+              <du_header href="setting.html" tit="修改密码">
+              </du_header>
+
+              <div class="layout_body">
+                <div class="du_form">
+                  <div class="cut"></div>
+                  <dl class="wide">
+                    <dd>
+                      <label>原密码</label>
+                      <yd-input v-model="my.oldpass" placeholder="请输入原密码"></yd-input>
+                    </dd><dd>
+                      <label>新密码</label>
+                      <yd-input v-model="my.pass1" placeholder="请输入新密码"></yd-input>
+                    </dd><dd>
+                      <label>确认密码</label>
+                      <yd-input v-model="my.pass2" placeholder="请确认新密码"></yd-input>
+                    </dd>
+
+                  </dl>
+
+                </div>
+
+                <div class="h30"></div>
+                <yd-button size="large"  @click.native="submitH" type="hollow">确定</yd-button>
+              </div>
+
+              
+          </section>
+        </div>
+    </body>
+</html>
+
+<script src="plugins/vue2.5.9.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.3.js"></script>
+<script src="plugins/ydui.flexible.js"></script>
+<script src="plugins/ele2.0.8.js"></script>
+<script src="plugins/moment-with-locales.min.js"></script>
+<script src="plugins/lodash.min.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/common.js"></script>
+<script src="js/du.js"></script>
+<script>
+
+var vm = new Vue({
+  mixins: [mixin_common],
+  el: '#app',
+  mounted:function () {
+    
+  },
+  methods:{
+    submitH:function() {
+      var _this = this;
+      if((!_this.my.pass1)||(!_this.my.pass2)){
+        _this.$dialog.toast({
+          mes: "密码不能为空，请重新填写",
+          timeout: 2000,
+          callback:function () {
+            _this.my.pass1="";
+            _this.my.pass2="";
+          }
+        });
+      }
+      else if(_this.my.pass1==_this.my.pass2){
+        post("/OE/Infor/ChangePwd",this.my)
+        .then(
+            function (res) {
+                _this.$dialog.toast({
+                  mes: "密码修改成功,请登录",
+                  icon: "success",
+                  timeout: 2000,
+                  callback:function () {
+                    window.location.href="login.html";
+                  }
+                });
+            },
+            function (err) {
+                _this.$dialog.toast({
+                  mes: err+" 请重新填写",
+                  timeout: 2000,
+                  callback:function () {
+                    _this.my.oldpass="";
+                    _this.my.pass1="";
+                    _this.my.pass2="";
+                  }
+                });
+            }
+        );
+      }else{
+        _this.$dialog.toast({
+          mes: "您两次填写的密码不一致，请重新填写",
+          timeout: 2000,
+          callback:function () {
+            _this.my.pass1="";
+            _this.my.pass2="";
+          }
+        });
+      }
+      
+    }
+  },
+  data: {
+    my:{
+        "oldpass": "",
+        "pass1": "",
+        "pass2": ""
+    }
+  }
+});
+   
+</script>

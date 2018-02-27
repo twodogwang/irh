@@ -1,0 +1,14 @@
+<yd-popup class="zh_popinfo" v-model="show.show" position="center" width="80%" height="50%">
+  <div class="pic" :style="{backgroundImage: 'url(' + data.pic + ')'}"></div>
+  <h1>{{data.name}}</h1>
+  <h3>{{data.pos}}</h3>
+  <p>所属医院：{{data.org}}</p>
+  <p>科室：{{data.dep}}</p>
+  <p>所属地：{{data.loc}}</p>
+  <p>个人简介：{{data.inf}}</p>
+  <div class="btns">
+    <div class="follow" :class="{'followed':data.fol}" @click="data.fol = !data.fol">{{data.fol ? '取消关注' : '关注'}}</div>
+    <div class="confirm" @click="show.show = false">确定</div>
+  </div>
+  <div class="close" @click="show.show = false">关闭</div>
+</yd-popup>

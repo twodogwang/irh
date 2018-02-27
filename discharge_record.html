@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>病历记录</title>
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/common.css" media="screen">
+    <link rel="stylesheet" href="css/zh.css" media="screen">
+  </head>
+    <body>
+        <!-- <div id='loading'> <div class='line-scale-pulse-out'> <i></i><i></i><i></i><i></i><i></i> </div></div> -->
+
+        <div id="app" v-cloak>
+          <section class="layout sec1">
+            <nav class="layout_head" >
+              <a class="left" href="main.html"><i class='iconfont icon-nav_fanhui_baise'></i></a>
+              <h1>病历记录</h1>
+              <a class="right"></a>
+            </nav>
+            <div class="layout_nav">
+              <div class="x_tab">
+                <a href="medical_record.html">全部</a>
+                <a href="outpatient_record.html">门诊病历</a>
+                <a href="admission_note.html">住院病历</a>
+                <a href="#" class="on">出院病历</a>
+              </div>
+            </div>
+            <div  class="layout_body scroll">
+              <du_list_mock url="drl" class="record_list">
+                <li slot="item" slot-scope="props">
+                  <div class="tit" :class="props.item_data.typeclr">
+                    <h3>{{props.item_data.type}}</h3>
+                  </div>
+                  <div class="cont">
+                    <p><span>病例原始号：</span>{{props.item_data.id}}</p>
+                    <p><span>机<i></i>构：</span>{{props.item_data.org}}</p>
+                    <p><span>科<i></i>室：</span>{{props.item_data.dep}}</p>
+                  </div>
+                  <div class="man tr">
+                    <p><span>报告人：</span>{{props.item_data.man}}</p>
+                  </div>
+                </li>
+              </du_list_mock>
+            </div>
+          </section>
+        </div>
+    </body>
+</html>
+
+<script src="plugins/vue2.5.9.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.3.js"></script>
+<script src="plugins/ydui.flexible.js"></script>
+<script src="plugins/ele2.0.8.js"></script>
+<script src="plugins/moment-with-locales.min.js"></script>
+<script src="plugins/lodash.min.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/common.js"></script>
+<script src="js/du.js"></script>
+<script src="js/zh.js"></script>
+<script>
+
+var vm = new Vue({
+  mixins: [mixin_common],
+  el: '#app',
+  mounted:function () {
+  },
+  methods:{
+  },
+  data: {
+  }
+});
+
+</script>

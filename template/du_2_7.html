@@ -1,0 +1,18 @@
+<section class="layout">
+  <nav class="layout_head">
+    <div class="left" @click="$emit('close')"><i class='iconfont icon-return'></i> 关闭</div>
+    <h1>{{tit}}--{{pid}}</h1>
+    <div class="right"></div>
+  </nav>
+  
+  <div class="layout_body scroll">
+    <div class="du_form">
+      <dl class="p30 scroll">
+        <dd v-for="item in arr">
+          <label>{{item.label}}</label>
+          <div class="tar">{{item.val}}</div>
+        </dd>
+      </dl>
+    </div>
+  </div>
+</section>

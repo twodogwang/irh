@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>注册</title>
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/common.css" media="screen">
+  </head>
+    <body>
+
+        <div id="app" v-cloak>
+          <section class="layout">
+
+              <du_header href="login.html" tit="注册">
+                <aa href="login.html">登录</aa>
+              </du_header>
+
+              <div class="layout_body p40">
+                <div class="login_main">
+                  <div class="h20"></div>
+                  <div class="btn_group2">
+                    <label><i class='iconfont icon-label_wo'></i> 我　　是</label>
+                    <el-select v-model="my.member" placeholder="请选择" @change="memberH">
+                        <el-option v-for="iii in member_option" :key="iii.val" :label="iii.tit" :value="iii.val"> </el-option>
+                    </el-select>
+                  </div>
+
+                  <div class="h20"></div>
+                  <div class="btn_group2">
+                    <label><i class='iconfont icon-label_wo'></i> 帐　　号</label>
+                    <yd-input slot="right" required v-model="my.sUserName" max="20" placeholder="请输入帐号"></yd-input>
+                  </div>
+                  <div class="h20"></div>
+                  <div class="btn_group2">
+                    <label><i class='iconfont icon-denglu-mima'></i> 密　　码</label>
+                    <yd-input slot="right" type="password" v-model="my.pwd" placeholder="请输入密码"></yd-input>
+                  </div>
+                  <div class="h20"></div>
+                  <div class="btn_group2">
+                    <label><i class='iconfont icon-denglu-mima'></i> 确认密码</label>
+                    <yd-input slot="right" type="password" v-model="my.pwd2" placeholder="请输入密码"></yd-input>
+                  </div>
+                  
+                  <div class="h20"></div>
+                  <div class="btn_group2">
+                    <label><i class='iconfont icon-label_wo'></i> 昵　　称</label>
+                    <yd-input slot="right" required v-model="my.sNickName" max="20" placeholder="请输入昵称"></yd-input>
+                  </div>
+
+                  <div class="h30"></div>
+                  <div class="btn_wide" @click="login">提交注册</div>
+                </div>
+              </div>
+          </section>
+        </div>
+    </body>
+</html>
+
+<script src="plugins/vue2.5.9.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.3.js"></script>
+<script src="plugins/ydui.flexible.js"></script>
+<script src="plugins/ele2.0.8.js"></script>
+<script src="plugins/moment-with-locales.min.js"></script>
+<script src="plugins/lodash.min.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/common.js"></script>
+<script src="js/du.js"></script>
+<script>
+
+var vm = new Vue({
+  mixins: [mixin_common],
+  el: '#app',
+  mounted:function () {},
+  methods:{
+    login:function () {
+      var _this = this;
+      post( "/User/Login",this.my )
+      .then(
+          function (res) {
+            window.localStorage.setItem("irh_token",res.token);
+            _this.$dialog.toast({
+              mes: _this.my.userName+"登录成功!",
+              icon: 'success',
+              timeout: 1000,
+              callback: function () {
+                window.location.href="main.html";
+              }
+            })
+          },
+          function (err) {
+            _this.$dialog.toast({
+              mes: err,
+              icon: 'error',
+              timeout: 1000})
+          });
+    },
+    memberH:function (n) {
+      this.member = n;
+    }
+  },
+  data: {
+    member_option:[
+        {tit:"会员",val:0},
+        {tit:"医生",val:1},
+        {tit:"经销商",val:2},
+        {tit:"厂家",val:3},
+        {tit:"家属",val:4},
+        {tit:"护士",val:5},
+        {tit:"服务专员/志愿者",val:6}
+      ],
+    my:{
+      member:0,
+      sUserName:"",
+      sNickName:"",
+      pwd:"",
+      pwd2:""
+    }
+  }
+});
+
+</script>

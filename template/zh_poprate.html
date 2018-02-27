@@ -1,0 +1,11 @@
+<yd-popup class="zh_poprate" v-if="!data.rated" v-model="show.show" position="bottom" height="40%">
+  <div class="top">
+    <div class="left" @click="show.show = false">取消</div>
+    <div class="center">评价</div>
+    <div class="right" @click="confirm()">确认</div>
+  </div>
+  <div class="content">
+    <yd-rate v-model="data.rate" size=".7rem" padding=".3rem"></yd-rate>
+    <textarea placeholder="请输入评价详情" v-model="data.details"></textarea>
+  </div>
+</yd-popup>

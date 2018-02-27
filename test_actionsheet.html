@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>美嘉优购_商家版_首页</title>
+    <link rel="stylesheet" href="css/ydui.base.css">
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        body{background-color: #ddd !important;}
+        #aaa{position: fixed; width: 100%; left: 0; bottom: 0; background-color: #900; padding: 1.3rem;}
+    </style>
+  </head>
+    <body>
+        <div id="app" v-cloak >
+          <yd-button @click.native="show2 = true" size="large" type="warning">不带取消</yd-button>
+
+                  <yd-actionsheet :items="myItems2" v-model="show2" @change="changeH"></yd-actionsheet>
+        </div>
+    </body>
+</html>
+
+<script src="plugins/vue2.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.5.js"></script>
+<script src="plugins/ydui.flexible1.1.3.js"></script>
+
+<script>
+var vm = new Vue({
+  el: '#app',
+  data: {
+    show2: false,
+    myItems2: [
+        {
+            label: '示例菜单二 - 自动关闭',
+            val: '333',
+            callback: (target) => {
+                console.log(target.val);
+                console.log(this);
+                this.$emit('change',target.val);
+            }
+        },
+        {label: '示例菜单三 - 自动关闭'},
+        {label: '示例菜单四 - 自动关闭'}
+    ]
+  },
+  methods:{
+   changeH:function(n) {
+                console.log(n);
+              },
+  }
+});
+   
+</script>

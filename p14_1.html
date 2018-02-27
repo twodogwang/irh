@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>我</title>
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/common.css" media="screen">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id='loading'>
+        <div class='line-scale-pulse-out'> <i></i><i></i><i></i><i></i><i></i> </div>
+    </div>
+
+    <div id="app" v-cloak>
+        <section class="layout">
+            <nav class="layout_head">
+                <a class="left" href="my.html"><i class='iconfont icon-nav_fanhui_baise'></i></a>
+                <h1>健康档案</h1>
+                <a href="my_info.html" class="right"><i class='iconfont icon-nav_shezhi'></i></a>
+            </nav>
+
+            <div class="layout_body">
+                <div class="grid2">
+                    <a href="health_event_list.html">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-wo-jiankangdangan"></use>
+                        </svg>
+                        健康事件</a>
+                    <a href="p3.html">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-wo-jiankangriji"></use>
+                        </svg>
+                        健康管理</a>
+                    <a href="health_parameters_table.html">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-wo-yaopinqixie"></use>
+                        </svg>
+                        生理参数</a>
+                    <a href="medical_record_list.html">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-wo-shujuluru"></use>
+                        </svg>
+                        就医记录</a>
+                </div>
+            </div>
+
+
+
+            <nav2 current="3"></nav2>
+
+        </section>
+    </div>
+</body>
+
+</html>
+
+<script src="plugins/vue2.5.9.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.3.js"></script>
+<script src="plugins/ydui.flexible.js"></script>
+<script src="plugins/moment-with-locales.min.js"></script>
+<script src="plugins/iconfont.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/common.js"></script>
+<script src="js/du.js"></script>
+<script>
+    var vm = new Vue({
+        mixins: [mixin_common],
+        el: '#app',
+        mounted: function () {
+            this.loading(false);
+        },
+        methods: {
+            searchH: function (txt) {
+            }
+        },
+        data: {
+        }
+    });
+
+</script>

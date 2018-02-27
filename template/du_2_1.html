@@ -1,0 +1,64 @@
+<section class="layout">
+  <nav class="layout_head">
+    <div class="left" @click="$emit('close')"><i class='iconfont icon-return'></i> 关闭</div>
+    <h1>{{tit}}</h1>
+    <div class="right"></div>
+  </nav>
+  <div class="layout_body scroll">
+    <div class="du_form">
+      <dl class="wide p30 scroll">
+        <dd>
+          <label>作业项目<sup>*</sup></label>
+          <el-select v-model="my.work_type" placeholder="请选择">
+              <el-option v-for="item in arr_type" :key="item" :label="item" :value="item"> </el-option>
+            </el-select>
+        </dd>
+      
+        <dd>
+          <label>开始时间<sup>*</sup></label>
+          <yd-datetime type="time" v-model="my.time1"></yd-datetime>
+        </dd>
+      
+        <dd>
+          <label>结束时间<sup>*</sup></label>
+          <yd-datetime type="time" v-model="my.time2"></yd-datetime>
+        </dd>
+      
+        <dd>
+          <label>开始日期<sup>*</sup></label>
+          <yd-datetime type="date" v-model="my.date1"></yd-datetime>
+        </dd>
+      
+        <dd>
+          <label>结束日期<sup>*</sup></label>
+          <yd-datetime type="date" v-model="my.date2"></yd-datetime>
+        </dd>
+      
+        <dd class="cut"></dd>
+        
+        <dd>
+          <label>关联病种</label>
+          <el-select v-model="my.val_disease" multiple placeholder="请选择">
+              <el-option-group
+                v-for="group in arr_disease"
+                :key="group.label"
+                :label="group.label">
+                <el-option
+                  v-for="item in group.options"
+                  :key="item"
+                  :label="item"
+                  :value="item">
+                </el-option>
+              </el-option-group>
+            </el-select>
+        </dd>
+        <dd>
+          <label>备注</label>
+          <yd-input v-model="my.remark" placeholder="请输入备注信息"></yd-input>
+        </dd>
+      </dl>
+      
+      <yd-button size="large" type="warning" @click.native="form_submit"><i class='iconfont icon-addition'></i> 确定</yd-button>
+    </div>
+  </div>
+</section>

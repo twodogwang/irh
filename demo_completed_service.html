@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <title>已完成的服务</title>
+    <link rel="stylesheet" href="css/ydui.rem1.1.3.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/common.css" media="screen">
+    <link rel="stylesheet" href="css/zh.css" media="screen">
+  </head>
+    <body>
+        <!-- <div id='loading'> <div class='line-scale-pulse-out'> <i></i><i></i><i></i><i></i><i></i> </div></div> -->
+
+        <div id="app" v-cloak>
+          <section class="layout sec1">
+            <nav class="layout_head" >
+              <a class="left" href="medical_record.html"><i class='iconfont icon-nav_fanhui_baise'></i></a>
+              <h1>已完成的服务</h1>
+              <a class="right"></a>
+            </nav>
+            <div  class="layout_body scroll">
+              <du_list_mock url="csl" class="record_list">
+                <li slot="item" slot-scope="props">
+                  <div class="tit">
+                    <h3>{{props.item_data.tit}}</h3>
+                    <p><span>单据号：</span>{{props.item_data.id}}</p>
+                  </div>
+                  <div class="cont">
+                    <p><span>服务起始时间：</span>{{props.item_data.start}}</p>
+                    <p><span>服务结束时间：</span>{{props.item_data.end}}</p>
+                    <p><span>服务类型：</span>{{props.item_data.type}}</p>
+                  </div>
+                  <div class="man">
+                    <p><span>服务人员：</span>{{props.item_data.man}}</p>
+                    <div class="sBtn" :class="{'forbid':props.item_data.rated}" @click="poprate(props.item_data)">{{props.item_data.rated ? '已评价' : '评价'}}</div>
+                  </div>
+                </li>
+              </du_list_mock>
+              <zh_poprate :show="showRate" :data="itemdata"></zh_poprate>
+            </div>
+          </section>
+        </div>
+    </body>
+</html>
+
+<script src="plugins/vue2.5.9.js"></script>
+<script src="plugins/axios.min.js"></script>
+<script src="plugins/ydui1.1.3.js"></script>
+<script src="plugins/ydui.flexible.js"></script>
+<script src="plugins/ele2.0.8.js"></script>
+<script src="plugins/moment-with-locales.min.js"></script>
+<script src="plugins/lodash.min.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/common.js"></script>
+<script src="js/du.js"></script>
+<script src="js/zh.js"></script>
+<script>
+
+var vm = new Vue({
+  mixins: [mixin_common],
+  el: '#app',
+  mounted:function () {
+  },
+  methods:{
+    poprate: function (data) {
+      console.log(data);
+      this.itemdata = data;
+      this.showRate.show = true;
+    }
+  },
+  data: {
+    showRate: {show: false},
+    itemdata: {}
+  }
+});
+
+</script>
